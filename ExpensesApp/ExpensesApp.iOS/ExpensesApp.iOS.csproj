@@ -157,4 +157,22 @@
       <Name>ExpensesApp</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\categories.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\categories%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\categories%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\expenses.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\expenses%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\expenses%403x.png" />
+  </ItemGroup>
 </Project>
