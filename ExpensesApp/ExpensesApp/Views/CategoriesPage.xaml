@@ -8,8 +8,8 @@
                 <DataTemplate>
                 <ViewCell>
                     <StackLayout>
-                        <Label></Label>
-                        <ProgressBar></ProgressBar>
+                        <Label/>
+                        <ProgressBar/>
                     </StackLayout>
                 </ViewCell>
                 </DataTemplate>
