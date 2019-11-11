@@ -8,7 +8,7 @@ namespace ExpensesApp.ViewModels
 
     class ExpensesViewModel
     {
-        private ObservableCollection<Expense> Expenses { get; set; }
+        public ObservableCollection<Expense> Expenses { get; set; }
 
         public Command AddExpenseCommand { get; set; }
 
