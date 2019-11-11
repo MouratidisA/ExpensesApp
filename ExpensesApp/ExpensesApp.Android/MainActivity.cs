@@ -1,11 +1,7 @@
-﻿using System;
-
-using Android.App;
+﻿using Android.App;
 using Android.Content.PM;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
 using Android.OS;
+using Environment = System.Environment;
 
 namespace ExpensesApp.Droid
 {
@@ -19,7 +15,13 @@ namespace ExpensesApp.Droid
 
             base.OnCreate(savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
-            LoadApplication(new App());
+
+            //SQLite 
+            string dbName = "intellicont_db.sqlite";
+            string folderPath = System.Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+            string fullPath = System.IO.Path.Combine(folderPath, dbName);
+
+            LoadApplication(new App(fullPath));
         }
     }
 }
