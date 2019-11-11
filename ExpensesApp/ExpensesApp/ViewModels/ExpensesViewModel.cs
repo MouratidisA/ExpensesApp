@@ -19,7 +19,7 @@ namespace ExpensesApp.ViewModels
             GetExpenses();
         }
 
-        private void GetExpenses()
+        public void GetExpenses()
         {
             Expenses.Clear();
 

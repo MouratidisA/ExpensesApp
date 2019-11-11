@@ -18,8 +18,9 @@ namespace ExpensesApp.ViewModels
             GetExpensesPerCategory();
         }
 
-        private void GetExpensesPerCategory()
+        public void GetExpensesPerCategory()
         {
+            CategoryExpensesCollection.Clear();
             float totalExpensesAmount = Expense.GetTotalExpensesAmount();
             foreach (var category in Categories)
             {
