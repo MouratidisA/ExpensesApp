@@ -3,6 +3,7 @@ using ExpensesApp.models;
 using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using Xamarin.Forms;
 
 namespace ExpensesApp.ViewModels
 {
@@ -42,7 +43,14 @@ namespace ExpensesApp.ViewModels
             get { return _expenseCategory; }
             set { _expenseCategory = value; OnPropertyChanged("ExpenseCategory"); }
         }
-        
+
+        public Command SaveExpenseCommand { get; set; }
+
+        public NewExpensesViewModel()
+        {
+            SaveExpenseCommand = new Command(InsertExpense);
+        }
+
         public void InsertExpense()
         {
             Expense expense=new Expense()
@@ -54,7 +62,17 @@ namespace ExpensesApp.ViewModels
                 Category = ExpenseCategory
             };
 
-            Expense.InsertExpense(expense);
+            int response = Expense.InsertExpense(expense);
+
+            if (response > 0)
+            {
+                Application.Current.MainPage.Navigation.PopAsync();
+            }
+            else
+            {
+                Application.Current.MainPage.DisplayAlert("Error", "No items were inserted", "Ok");
+            }
+
         }
 
         // INotifyPropertyChanged
