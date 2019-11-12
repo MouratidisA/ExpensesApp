@@ -1,7 +1,9 @@
-﻿using ExpensesApp.models;
+﻿using ExpensesApp.Interfaces;
+using ExpensesApp.models;
+using PCLStorage;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
-using ExpensesApp.Interfaces;
 using Xamarin.Forms;
 
 namespace ExpensesApp.ViewModels
@@ -12,8 +14,11 @@ namespace ExpensesApp.ViewModels
         public ObservableCollection<string> Categories { get; set; }
         public ObservableCollection<CategoryExpenses> CategoryExpensesCollection { get; set; }
 
+        public Command ExportCommand { get; set; }
+
         public CategoriesViewModel()
         {
+            ExportCommand = new Command(ShareReport);
             Categories = new ObservableCollection<string>();
             CategoryExpensesCollection = new ObservableCollection<CategoryExpenses>();
             GetCategories();
@@ -27,12 +32,12 @@ namespace ExpensesApp.ViewModels
             foreach (var category in Categories)
             {
                 var expenses = Expense.GetExpenses(category);
-                float expensesAmountInCategory = expenses.Sum(e=>e.Amount);
+                float expensesAmountInCategory = expenses.Sum(e => e.Amount);
 
                 CategoryExpenses categoryExpenses = new CategoryExpenses()
                 {
                     Category = category,
-                    ExpensesPercentage = expensesAmountInCategory/totalExpensesAmount
+                    ExpensesPercentage = expensesAmountInCategory / totalExpensesAmount
                 };
 
                 CategoryExpensesCollection.Add(categoryExpenses);
@@ -51,10 +56,25 @@ namespace ExpensesApp.ViewModels
             Categories.Add("Other");
         }
 
-        public void ShareReport()
+        public async void ShareReport()
         {
+            IFileSystem fileSystem = FileSystem.Current;
+            IFolder rootFolder = fileSystem.LocalStorage;
+            IFolder reportsFolder = await rootFolder.CreateFolderAsync("reports", CreationCollisionOption.OpenIfExists);
+
+            var txtFile = await reportsFolder.CreateFolderAsync("reports.txt", CreationCollisionOption.ReplaceExisting);
+
+            using (StreamWriter sw = new StreamWriter(txtFile.Path))
+            {
+                foreach (var ce in CategoryExpensesCollection)
+                {
+                    sw.WriteLine($"{ce.Category} - {ce.ExpensesPercentage:p}");
+                }
+            }
+
+
             IShare sharedDependency = DependencyService.Get<IShare>();
-            sharedDependency.Show("", "", "");
+            sharedDependency.Show("Expense Report", "Here is your expenses report", txtFile.Path);
         }
 
 
