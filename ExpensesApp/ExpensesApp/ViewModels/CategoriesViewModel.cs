@@ -74,7 +74,7 @@ namespace ExpensesApp.ViewModels
 
 
             IShare sharedDependency = DependencyService.Get<IShare>();
-            sharedDependency.Show("Expense Report", "Here is your expenses report", txtFile.Path);
+            await sharedDependency.Show("Expense Report", "Here is your expenses report", txtFile.Path);
         }
 
 
