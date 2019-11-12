@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
+﻿using ExpensesApp.iOS.Dependencies;
 using Foundation;
+using System;
 using UIKit;
+using Xamarin.Forms;
 
 namespace ExpensesApp.iOS
 {
@@ -29,6 +28,9 @@ namespace ExpensesApp.iOS
             string dbName = "local_db.sqlite";
             string folderPath = System.IO.Path.Combine(System.Environment.GetFolderPath(Environment.SpecialFolder.Personal), "..", "Library");
             string fullPath = System.IO.Path.Combine(folderPath, dbName);
+
+            //Share dependency registration
+            DependencyService.Register<Share>();
 
             LoadApplication(new App(fullPath));
             return base.FinishedLaunching(app, options);
