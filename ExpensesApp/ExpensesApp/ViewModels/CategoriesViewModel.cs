@@ -1,6 +1,8 @@
 ﻿using ExpensesApp.models;
 using System.Collections.ObjectModel;
 using System.Linq;
+using ExpensesApp.Interfaces;
+using Xamarin.Forms;
 
 namespace ExpensesApp.ViewModels
 {
@@ -49,10 +51,18 @@ namespace ExpensesApp.ViewModels
             Categories.Add("Other");
         }
 
+        public void ShareReport()
+        {
+            IShare sharedDependency = DependencyService.Get<IShare>();
+            sharedDependency.Show("", "", "");
+        }
+
+
         public class CategoryExpenses
         {
             public string Category { get; set; }
             public float ExpensesPercentage { get; set; }
         }
+
     }
 }
