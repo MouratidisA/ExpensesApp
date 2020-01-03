@@ -18,6 +18,7 @@ namespace ExpensesApp.Views
         public ExpenseDetailsPage(Expense expense)
         {
             InitializeComponent();
+            ViewModel = Resources["vm"] as ExpenseDetailsViewModel;
             ViewModel.Expense = expense;
         }
     }
