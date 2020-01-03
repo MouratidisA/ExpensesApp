@@ -4,7 +4,7 @@ using Xamarin.Forms;
 
 namespace ExpensesApp.Behaviors
 {
-    class ListviewBehavior:Behavior<ListView>
+    class ListViewBehavior:Behavior<ListView>
     {
         private ListView _listView;
         protected override void OnAttachedTo(ListView bindable)
