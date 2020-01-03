@@ -5,7 +5,7 @@ using SQLite;
 
 namespace ExpensesApp.models
 {
-    class Expense
+    public class Expense
     {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
