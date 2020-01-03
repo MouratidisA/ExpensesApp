@@ -17,7 +17,7 @@ namespace ExpensesApp.Droid
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
 
             //SQLite 
-            string dbName = "intellicont_db.sqlite";
+            string dbName = "local_db.sqlite";
             string folderPath = System.Environment.GetFolderPath(Environment.SpecialFolder.Personal);
             string fullPath = System.IO.Path.Combine(folderPath, dbName);
 

@@ -21,8 +21,8 @@ namespace ExpensesApp.UWP
         {
             this.InitializeComponent();
 
-            LoadApplication(new ExpensesApp.App());
-            string dbName = "intellicont_db.sqlite";
+            //LoadApplication(new ExpensesApp.App());
+            string dbName = "local_db.sqlite";
             string folderPath = Windows.Storage.ApplicationData.Current.LocalFolder.Path;
             string fullPath = System.IO.Path.Combine(folderPath, dbName);
             LoadApplication(new ExpensesApp.App(fullPath));
