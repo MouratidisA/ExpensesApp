@@ -1,4 +1,7 @@
 ﻿using ExpensesApp.iOS.Effects;
+using System;
+using System.ComponentModel;
+using UIKit;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 
@@ -8,20 +11,40 @@ using Xamarin.Forms.Platform.iOS;
 namespace ExpensesApp.iOS.Effects
 {
     public class SelectedEffect : PlatformEffect
+    {
+        private UIColor selectedColor;
+
+        protected override void OnAttached()
         {
-            public SelectedEffect()
-            {
+            selectedColor = new UIColor(176 / 255, 152 / 255, 164 / 255, 255 / 255);
+        }
 
+        protected override void OnElementPropertyChanged(PropertyChangedEventArgs args)
+        {
+            base.OnElementPropertyChanged(args);
+            try
+            {
+                if (args.PropertyName == "IsFocused")
+                {
+                    if (Control.BackgroundColor != selectedColor)
+                    {
+                        Control.BackgroundColor = selectedColor;
+                    }
+                    else
+                    {
+                        Control.BackgroundColor = UIColor.White;
+                    }
+                }
             }
-
-            protected override void OnAttached()
+            catch (InvalidCastException)
             {
-
-            }
-
-            protected override void OnDetached()
-            {
-
+                Control.BackgroundColor = selectedColor;
             }
         }
+
+        protected override void OnDetached()
+        {
+
+        }
     }
+}
